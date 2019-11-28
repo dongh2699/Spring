@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.model.B_ContentFileDAO">
+	<insert id="addFile" parameterType="hashmap">
+		insert into B_CONTENT_FILE  values(#{fileName},#{board_no},sysdate)
+	</insert>
+	
+	<select id="getfiles" parameterType="int" resultType="String">
+		select file_name from b_content_file where bc_no=#{bc_No}
+	</select>
+	
+	<delete id="deletefiles" parameterType="int" >
+	 delete from B_CONTENT_FILE where bc_no=#{bc_No}
+	</delete>
+	
+</mapper>

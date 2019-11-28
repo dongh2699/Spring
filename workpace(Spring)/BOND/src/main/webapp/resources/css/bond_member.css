@@ -1,0 +1,74 @@
+@CHARSET "UTF-8";
+
+main .container .row .col-md-6 {
+	margin-top: 150px;
+}
+
+.col-md-12 {
+	padding: 20px 0px;
+	background-color: white;
+	border-radius: 20px;
+	margin-bottom:40px;
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.member_Count {
+	margin: 50px 0px;
+	font-size: 20px;
+}
+
+.blog_Member_Title {
+	font-size: 35px;
+	font-weight: 600;
+}
+
+#viewMember {
+	margin-top: 50px;
+	margin-bottom: 30px;
+}
+
+.m_Picture {
+	position: absolute;
+	top: 50%;
+	left: 10%;
+	transform: translate(-50%, -50%);
+}
+
+.m_nickname {
+	position: absolute;
+	top: 50%;
+	left: 35%;
+	transform: translate(-50%, -50%);
+}
+
+.m_grade {
+	position: absolute;
+	top: 50%;
+	left: 60%;
+	transform: translate(-50%, -50%);
+}
+
+input[type=text] {
+   width: 25%;
+    border: 2px solid #aaa;
+    border-radius: 20px;
+    outline: none;
+    padding: 8px;
+    box-sizing: border-box;
+    transition: .3s;
+    font-size: 10pt;
+}
+ 
+.change_Grade {
+	position: absolute;
+	top: 50%;
+	left: 85%;
+	transform: translate(-50%, -50%);
+}
+@media screen and (max-width: 425px) {
+   
+   main .col-md-12 input[type=text] {
+      width: 80%;
+   }
+}

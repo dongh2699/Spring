@@ -1,0 +1,322 @@
+@CHARSET "UTF-8";
+
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+* {
+   margin: 0;
+    padding: 0;
+    font-family: "Nanum Gothic", sans-serif;
+}
+
+header {
+   color: black;
+   font-size: 13pt;
+   position: fixed;
+   padding-top: 20px;
+   padding-bottom: 20px;
+   z-index: 2;
+   background-color: white;
+   width: 100%;
+}
+
+header a {
+   color: black;
+}
+
+header a:hover {
+   text-decoration: none;
+}
+
+header .container .row .col-md-7 input[type=text] {
+   width: 25%;
+    border: 2px solid #aaa;
+    border-radius: 20px;
+    outline: none;
+    padding: 8px;
+    box-sizing: border-box;
+    transition: .3s;
+    font-size: 10pt;
+}
+
+header .container .row .col-md-7 input[type=text]:focus {
+   border-color: dodgerBlue;
+    box-shadow: 0 0 8px 0 dodgerBlue;
+}
+
+header .container .row .col-md-7 input[type=submit] {
+   display: none;
+}
+
+nav {
+   background-color: #1fc535;
+   height: 30px;
+   line-height: 30px;
+   font-size: 12pt;
+   position: fixed;
+   width: 100%;
+   margin-top: 80px;
+   z-index: 2;
+}
+
+nav ul {
+   text-decoration: none;
+   list-style: none;
+   text-align: center;
+   color: white;
+}
+
+nav ul li {
+   display: inline-block;
+   padding: 0 5%;
+   color: white;
+}
+
+nav ul li a {
+   color: white;
+}
+
+nav ul li a:hover {
+   color: white;
+   text-decoration: none;
+}
+
+main {
+   background-color: #eef0f3;
+}
+
+main .container .row .col-md-3 #leftaside {
+   position: fixed;
+   margin-top: 150px;
+}
+
+main .container .row .col-md-3 aside .bondname {
+   font-weight: bold;
+   font-size: 20pt;
+   width: 220px;
+}
+
+main .container .row .col-md-3 aside .membercount {
+   font-size: 12pt;
+}
+
+main .container .row .col-md-3 aside .bondintro {
+   font-size: 12pt;
+    word-break: break-word;
+width: 220px;
+   
+}
+
+main .container .row .col-md-6 {
+   margin-top: 150px;
+}
+main .container .row .col-md-6 .col-md-12 {
+	text-align: center;
+	padding-bottom: 25px;
+}
+
+main .container .row .col-md-6 .col-md-12 span {
+	font-size: 20pt;
+}
+
+
+
+main .container .row .col-md-3 #rightaside1 {
+   position: fixed;
+   margin-top: 150px;
+   width:250px;
+}
+
+main .container .row .col-md-3 #rightaside1 .rankarea {
+   width: 100%;
+    height: auto;
+   background-color: white;
+    padding-bottom: 20px;
+    border-radius: 10px;
+    padding-top:10px;
+    margin-left: 30px;
+}
+
+main .container .row .col-md-3 #rightaside1 .rankarea .title {
+   font-weight: bold;
+    font-size: 20px;
+    margin-left: 20px;
+}
+.img_Area{
+   margin-left: 2.5px;
+}
+
+main .container .row .col-md-3 #rightaside1 .rankarea .ranking {
+   display: block;
+    margin-top: 5px;
+    font-size: 15px;
+    margin-bottom: 15px;
+    margin-left: 20px;
+    padding-top: 10px;
+}
+
+main .container .row .col-md-3 #rightaside1 .rankarea .ranking a {
+   color: black;
+}
+
+main .container .row .col-md-3 #rightaside1 .rankarea .ranking a:hover {
+   text-decoration: none;
+}
+
+main .container .row .col-md-3 #rightaside2 {
+   position: fixed;
+   margin-top: 500px;
+   width:250px;
+  
+}
+
+main .container .row .col-md-3 #rightaside2 .noticearea {
+   width: 100%;
+    height: auto;
+    background-color: white;
+    padding-bottom: 20px; 
+    border-radius: 10px;
+    padding-top:10px;
+    margin-left: 30px;
+}
+
+main .container .row .col-md-3 #rightaside2 .noticearea .title {
+   font-weight: bold;
+    font-size: 20px;
+    margin-left: 20px;
+}
+main .container .row .col-md-3 #rightaside2 .noticearea .notice {
+   display: block;
+    margin-top: 5px;
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    
+}
+
+input[type=file] {
+    width: 50%;
+    border: 2px solid #aaa;
+    border-radius: 4px;
+    outline: none;
+    padding: 8px;
+    box-sizing: border-box;
+    transition: .3s;
+    margin-left: 25%;
+}
+
+input[type=text] {
+    width: 50%;
+    border: 2px solid #aaa;
+    border-radius: 4px;
+    outline: none;
+    padding: 8px;
+    box-sizing: border-box;
+    transition: .3s;
+}
+
+input[type=text]:focus {
+    border-color: dodgerBlue;
+    box-shadow: 0 0 8px 0 dodgerBlue;
+}
+
+textarea {
+	width: 50%;
+    border: 2px solid #aaa;
+    border-radius: 4px;
+    outline: none;
+    padding: 8px;
+    box-sizing: border-box;
+    transition: .3s;
+}
+
+select {
+    width: 50%;
+    border: 2px solid #aaa;
+    border-radius: 4px;
+    outline: none;
+    padding: 8px;
+    box-sizing: border-box;
+    transition: .3s;
+}
+
+input[type=submit] {
+    color: white;
+    width: 50%;
+    height: 50px;
+    border: none;
+    font-size: 15pt;
+    outline: none;
+    background-color: #1fc535;
+}
+
+
+input[type=button] {
+    color: white;
+    width: 50%;
+    height: 50px;
+    border: none;
+    font-size: 15pt;
+    outline: none;
+    background-color: #1fc535;
+    margin-top: 25px;
+}
+.blog_Img{
+	width: 100%;
+}
+.current_blog_Img{
+	width: 80%;
+	height: auto;
+}
+.blog_Imglayout{
+	background-color: #636e72;
+	width: 220px;
+	height:  220px;
+	line-height: 220px;
+	margin-bottom: 20px;
+}
+
+@media screen and (max-width: 425px) {
+
+	main{
+	height: 1400px;
+	}
+   
+   header .container .row .col-md-3 {
+       text-align: center;
+    }
+    
+    header .container .row .col-md-7 {
+       text-align: center;
+       margin-top: 30px;
+    }
+    
+    header .container .row .col-md-7 input[type=text] {
+       width: 80%;
+    }
+    
+    header .container .row .col-md-2 {
+       display: none;
+    }
+   
+   nav {
+      top: 55px;
+   }
+   
+   main .container .row .col-md-3 {
+      display: none;
+   }
+   
+   main .container .row .col-md-6 {
+      top: 100px;
+   }
+   
+   textarea {
+      width: 100%;
+   }
+   
+   #gallary .modal-content {
+   		display: block;
+   }
+   

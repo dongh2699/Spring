@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.model.MemberDAO">
+
+	<insert id="addMember" parameterType="com.sist.model.MemberDTO">
+		insert into member values(
+		#{m_Email},#{m_Pw},#{m_Name},#{m_Nickname},#{m_Birth},#{m_Phone},#{m_Picture})
+	</insert>
+	<select id="emailCheck" parameterType="String" resultType="com.sist.model.MemberDTO">
+		select * from member where m_Email=#{n_Email}
+	</select>
+	<select parameterType="String" resultType="com.sist.model.MemberDTO" id="loginCheck">
+		SELECT * FROM
+		MEMBER WHERE M_EMAIL = #{m_Email}
+	</select>
+
+	<select resultType="com.sist.model.MemberDTO" id="viewMember">
+		SELECT *FROM
+		MEMBER WHERE M_EMAIL = #{m_Email} AND M_PW = #{m_Pw}
+	</select>
+
+	<update parameterType="com.sist.model.MemberDTO" id="modify_Member">
+		update member
+		set m_Pw=#{m_Pw},m_Name=#{m_Name},m_Nickname=#{m_Nickname},
+		m_Birth=#{m_Birth},m_Phone=#{m_Phone},m_Picture=#{m_Picture}
+		where M_EMAIL=#{m_Email}
+	</update>
+	
+	<delete parameterType="String" id="delete_Member">
+		delete from member where  M_EMAIL=#{m_Email}
+	</delete>
+	
+	<select resultType="com.sist.model.MemberDTO" id="findEmail">
+      SELECT * FROM MEMBER WHERE M_NAME = #{m_Name} AND M_PHONE = #{m_Phone}
+   </select>
+   
+   <update parameterType="com.sist.model.MemberDTO" id="modifypwd">
+      update member set m_Pw = #{m_Pw} where m_Email = #{m_Email}
+   </update>
+   
+
+</mapper>

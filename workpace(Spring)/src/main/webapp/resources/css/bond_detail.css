@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+nav {
+   background-color: yellow;
+}
+
+nav ul {
+   text-decoration: none;
+   list-style: none;
+   text-align: center;
+}
+
+nav ul li {
+   display: inline-block;
+   padding: 0 50px;
+}
+
+.container .row .col-md-3 {
+   background-color: pink;
+}
+
+.container .row .col-md-3 aside .bondname {
+   font-weight: bold;
+   font-size: 20pt;
+}
+
+.container .row .col-md-6 main .insertcont {
+   background-color: skyblue;
+}

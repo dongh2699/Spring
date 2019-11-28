@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.model.BlogDAO">
+	<insert id="createBond" parameterType="com.sist.model.BlogDTO">
+		insert into Blog
+		values(blog_seq.nextval,#{b_Name},#{b_Intro},#{b_Picture})
+	</insert>
+
+	<select id="get_Bond" parameterType="com.sist.model.BlogDTO"
+		resultType="int">
+		select b_no from Blog where b_name=#{b_Name} and
+		b_intro=#{b_Intro}
+	</select>
+
+	<insert id="b_m_create" parameterType="hashmap">
+		insert into blog_member
+		values(#{Blog_No},#{M_Email},'admin')
+	</insert>
+
+<!-- 페이징 처리해서 사용자가 가입한 블로그 리스트 보여주기 -->
+   <select id="select_MyBlog" parameterType="hashmap"
+      resultType="com.sist.model.BlogDTO">
+      
+      <![CDATA[
+         select b_No, b_Name, b_Intro, b_Picture
+         from( select p.*, row_number() 
+            over(order by b_No desc) rnum
+            from (select b.b_No,b.b_Name,b.b_Intro,b.b_Picture
+            from blog b,member m,blog_member b_m
+            where m.m_Email=b_m.m_Email and b.b_No=b_m.b_No and m.m_Email=#{MyEmail}) p)
+            where rnum>=#{StartNo} and rnum<=#{EndNo}
+      ]]>
+      
+      
+   </select>
+	<select id="getBlog_Detail" parameterType="int"
+		resultType="com.sist.model.BlogDTO">
+		select * from Blog where b_no=#{b_No}
+	</select>
+
+	<select id="member_Count" parameterType="int" resultType="int">
+		select
+		count(*) from Blog_member where b_no=#{b_No}
+	</select>
+	
+	
+	<update id="modify_Bond" parameterType="com.sist.model.BlogDTO">
+		update blog set b_Name=#{b_Name},b_intro=#{b_Intro},b_Picture=#{b_Picture} where b_No=#{b_No}
+	</update>
+	
+	<delete id="delete_Bond" parameterType="int" >
+		delete from blog where b_No=#{b_No}
+	</delete>
+	<!-- <select id="recommendation_Bond" resultType="hashmap">
+	select ct_name,b_no,b_name,b_intro,b_picture
+	from (select ct_name,b_no,b_name,b_intro,b_picture,rank() over(partition by ct_name order by b_view desc) as rank
+        from blogrank)
+	where rank=1
+	</select> -->
+
+<select id="gethotcontent_total" resultType="com.sist.model.Blog_contentDTO">
+   <![CDATA[select * from ( select *  from blog_content
+         where bc_goods > 0 and bc_date >= TO_CHAR(SYSDATE-300,'YYYYMMDD')  ORDER BY bc_goods desc, bc_date desc ) where rownum < 6]]> 
+   </select>
+
+   <!-- 블로그 멤버 조회 -->
+   <select id="get_BlogMember" parameterType="int"
+      resultType="hashmap">
+      select * from BLOG_MEMBER bm join member m on bm.m_email =
+      m.m_email where b_no =#{b_no}
+   </select>
+
+   <!-- 블로그 멤버 검색 -->
+   <select id="get_SearchMember" parameterType="hashmap"
+      resultType="hashmap">
+      select * from BLOG_MEMBER bm join member m on bm.m_email =
+      m.m_email where m.M_NICKNAME =#{M_NICKNAME} and b_No=#{b_No}
+   </select>
+   <!-- 블로그 멤버 권한 변경 -->
+   <update id="changeManage"
+      parameterType="com.sist.model.BlogMemberDTO">
+      update BLOG_MEMBER set BM_GRADE =#{bm_Grade} where
+      m_Email=#{m_Email} and b_No=#{b_No}
+   </update>
+   
+   <!-- 사용자가 가입한 블로그 총 갯수 카운트 -->
+   <select id="countMyBlogList" parameterType="String"  resultType="int">
+      select count(*)
+      from blog b,member m,blog_member b_m
+      where m.m_email=b_m.m_email and b.b_no=b_m.b_no and m.m_Email=#{m_Email}
+   </select>
+   
+   <!-- 검색한 블로그 수 카운트 -->
+   <select id="CountSearchBlogList" parameterType="String" resultType="int">
+
+      select count (*)
+      from(select distinct b.b_name,ct_name ,b.b_no,b.b_intro,b.b_picture
+      from blog b,blog_category bc,categorylist c 
+      where bc.b_no = b.b_no 
+        and C.ct_no = bc.ct_no and b.b_name like '%'||#{searchContent}||'%' or c.ct_name like '%'||#{searchContent}||'%')
+
+   </select>
+   <!-- 페이징 처리해서 검색결과리스트 보여주기 -->
+   <select id="search_blog" parameterType="hashmap" resultType="hashmap">
+      <![CDATA[
+      select b_No, b_Name, b_Intro, b_Picture,ct_name
+      from( select p.*, row_number() 
+        over(order by b_No desc) rnum
+         from (select distinct b.b_name,ct_name ,b.b_no,b.b_intro,b.b_picture
+      from blog b,blog_category bc,categorylist c 
+      where bc.b_no = b.b_no 
+        and C.ct_no = bc.ct_no and b.b_name like '%'||#{Search_Content}||'%' or c.ct_name like '%'||#{Search_Content}||'%') p)
+      where rnum>=#{StartNo} and rnum<=#{EndNo}
+   ]]>
+   </select>
+   <!-- 가입된 회원인지 확인 -->
+   <select id="blog_Member_Check" parameterType="hashmap" resultType="int">
+      select count(m_email)
+   from (select m_Email
+            from blog_member
+            where b_No =#{b_No}  and (bm_grade IN ('admin','manage','member')))
+   where m_Email = #{m_Email}
+   </select>
+   
+   <!-- admin 또는 manager 인지 등급 확인 -->
+   <select id="blog_Notice_Member_Check" parameterType="hashmap" resultType="int">
+      select count(m_Email)
+   from (select m_Email
+            from blog_member
+            where b_no = #{b_No} and (bm_grade = 'admin' or bm_grade = 'manager'))
+   where m_email = #{m_Email}
+   </select>
+   
+   <select id="get_Grede" parameterType="hashmap" resultType="String">
+   select bm_grade 
+   from blog_member
+   where b_no=#{b_No} and m_email=#{m_Email}
+   </select>
+   
+   <!-- 본드 회원 추가 -->
+   <insert id="bondGuestJoin" parameterType="hashmap">
+      insert into blog_member
+      values(#{b_No},#{m_Email},'member')
+   </insert>
+
+   <delete id="bondGuestWithdrawal" parameterType="hashmap">
+      delete from blog_member
+      where m_Email=#{m_Email} and b_No=#{b_No}
+   </delete>
+
+</mapper>

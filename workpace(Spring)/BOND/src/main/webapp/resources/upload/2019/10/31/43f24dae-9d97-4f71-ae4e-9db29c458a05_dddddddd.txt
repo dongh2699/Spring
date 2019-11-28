@@ -1,0 +1,15 @@
+[
+MemberDTO
+(m_Email=null, m_Pw=null, m_Name=null, m_Nickname=오용수, m_Birth=null, m_Phone=null, m_Picture=null, 
+blog_contentDTO=[Blog_contentDTO(bc_No=0, m_Email=null, b_No=0, bc_Cont= dsadsada, bc_Picture=null, bc_Video=null, bc_File=null, bc_Date=2019-10-24 09:54:24), 
+Blog_contentDTO(bc_No=0, m_Email=null, b_No=0, bc_Cont=dsadsa, bc_Picture=null, bc_Video=null, bc_File=null, bc_Date=2019-10-24 09:54:25), 
+Blog_contentDTO(bc_No=0, m_Email=null, b_No=0, bc_Cont=dsadsad, bc_Picture=null, bc_Video=null, bc_File=null, bc_Date=2019-10-24 09:54:26)]
+), 
+
+MemberDTO
+(m_Email=null, m_Pw=null, m_Name=null, m_Nickname=12345, m_Birth=null, m_Phone=null, m_Picture=null, blog_contentDTO=
+[Blog_contentDTO(bc_No=0, m_Email=null, b_No=0, bc_Cont=dsaasd, bc_Picture=null, bc_Video=null, bc_File=null, bc_Date=2019-10-24 14:07:19), 
+Blog_contentDTO(bc_No=0, m_Email=null, b_No=0, bc_Cont=23232, bc_Picture=null, bc_Video=null, bc_File=null, bc_Date=2019-10-24 14:07:24), 
+Blog_contentDTO(bc_No=0, m_Email=null, b_No=0, bc_Cont=434, bc_Picture=null, bc_Video=null, bc_File=null, bc_Date=2019-10-24 14:07:27)]
+)
+]

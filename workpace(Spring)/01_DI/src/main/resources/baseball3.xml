@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+
+			
+			<bean class="com.test.di10.Config" />
+			
+			<context:annotation-config />
+			
+			<bean id="player3" class="com.test.di10.Player">
+				<constructor-arg value="박병호" />
+				<constructor-arg value="35" />
+					<constructor-arg>
+						<list>
+							<value>4번타자</value>
+							<value>우익수</value>
+						</list>
+					
+					</constructor-arg>
+					<property name="height" value="181" />
+					<property name="weight" value="77" />
+			
+			</bean>
+			
+</beans>

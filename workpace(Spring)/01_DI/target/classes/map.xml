@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<bean id="maptest" class="com.test.di08.MapTest">
+			<property name="map">
+					<map>
+						<entry>
+								<key><value>1</value></key> <!-- 키에 대한 값 -->
+								<value>짜장면</value>				<!-- value에 대한 값 -->												
+						</entry>
+						<entry>
+								<key><value>2</value></key> <!-- 키에 대한 값 -->
+								<value>짬뽕</value>				<!-- value에 대한 값 -->												
+						</entry>
+						<entry>
+								<key><value>3</value></key> <!-- 키에 대한 값 -->
+								<value>볶음밥</value>				<!-- value에 대한 값 -->												
+						</entry>
+						<entry>
+								<key><value>4</value></key> <!-- 키에 대한 값 -->
+								<value>중국냉면</value>				<!-- value에 대한 값 -->												
+						</entry>
+						<entry>
+								<key><value>5</value></key> <!-- 키에 대한 값 -->
+								<value>탕수육</value>				<!-- value에 대한 값 -->												
+						</entry>																														
+					</map>									
+			</property>
+	
+	
+	
+	
+	
+	
+	</bean>
+
+
+</beans>

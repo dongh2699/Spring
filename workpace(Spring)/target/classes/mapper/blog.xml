@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.model.BlogDAO">
+	<insert id="createBond" parameterType="com.sist.model.BlogDTO">
+		insert into Blog values(blog_seq.nextval,#{b_Name},#{b_Intro},#{b_Picture})
+	</insert>
+	
+	<select id="get_Bond" parameterType="com.sist.model.BlogDTO" resultType="int">
+		select b_no from Blog where b_name=#{b_Name} and b_intro=#{b_Intro}
+	</select>
+	
+	<insert id="b_m_create" parameterType="hashmap">
+		insert into blog_member values(#{Blog_No},#{M_Email},'admin')
+	</insert>
+	
+	<select id="select_MyBlog" parameterType="com.sist.model.MemberDTO" resultType="com.sist.model.BlogDTO">
+		select b.b_no,b.b_name,b.b_intro,b.b_picture
+			from blog b,member m,blog_member b_m
+				where m.m_email=b_m.m_email and b.b_no=b_m.b_no and m.m_email=#{m_Email}
+	</select>
+	
+	<select id="getBlog_Detail" parameterType="int" resultType="com.sist.model.BlogDTO">
+		select * from Blog where b_no=#{b_No}
+	</select>
+	
+	<select id="member_Count" parameterType="int" resultType="int">
+		select count(*) from Blog_member where b_no=#{b_No}
+	</select>
+	
+	<insert id="create_board" parameterType="com.sist.model.Blog_contentDTO">
+		insert into blog_content values(blog_content_seq.nextval,#{m_Email},#{b_No },#{bc_Cont},#{bc_Picture ,jdbcType=VARCHAR},#{bc_Video, jdbcType=VARCHAR},#{bc_File, jdbcType=VARCHAR},sysdate)
+	</insert>
+	
+	<select id="get_BoardList" parameterType="com.sist.model.Blog_contentDTO" resultType="com.sist.model.Blog_contentDTO">
+		select * from blog_content where b_no=#{b_No}
+	</select>
+</mapper>

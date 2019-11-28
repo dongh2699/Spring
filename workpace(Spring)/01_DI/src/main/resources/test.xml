@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!--  스프링 컨테이너로 클래스를 외부에서 생성하는 공간 -->
+	
+	<!--  id="빈의 고유 이름" class="객체를 생성할 클래의 위치(패키지명.클래스명)" 
+		   빈 객체 스프링 컨테이너에서 생성하는 방법. 빈 정의.
+		   -"com.test.di01.TestDAOImpl" 클래스를 "daoImpl" 이라는 id를 지정을 하여 객체(bean)를 생성한다는 의미.
+	
+	-->
+	<bean id="daoImpl" class="com.test.di01.TestDAOImpl" />
+</beans>

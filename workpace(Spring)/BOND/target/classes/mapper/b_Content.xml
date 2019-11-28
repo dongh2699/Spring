@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.model.B_ContentDAO">
+	
+
+	<insert id="create_Comment" parameterType="com.sist.model.Content_CommentDTO">
+		insert into
+		content_comment
+		values(CONTENT_COMMENT_SEQ.nextval,#{bc_No},#{cc_Cont},#{m_Email},CONTENT_COMMENT_SEQ.currval,0,0,sysdate)
+	</insert>
+
+	<insert id="create_board" parameterType="com.sist.model.Blog_contentDTO">
+		insert into blog_content
+		values(blog_content_seq.nextval,#{m_Email},#{b_No
+		},#{bc_Cont},sysdate,#{bc_filecount},default,default)
+	</insert>
+	
+	<select id="get_CommentList" parameterType="com.sist.model.Content_CommentDTO" resultType="hashmap">
+		select M.m_Nickname, M.m_Picture,cc.cc_Cont,cc.cc_Indent,cc.cc_Date,cc.bc_No,cc.cc_No,cc.cc_Step,cc.cc_Group
+		from member M ,content_comment cc
+		where m.m_email=cc.m_email and bc_no=#{bc_No}
+		order by cc_group desc ,cc.cc_step
+	</select>
+	
+	<resultMap type="com.sist.model.Blog_contentDTO" id="Blog_contentDTO">
+		<result column="bc_Cont" property="bc_Cont" />
+		<result column="bc_Date" property="bc_Date" />
+		<result column="bc_No" property="bc_No" />
+		<result column="bc_filecount" property="bc_filecount" />
+		<result column="b_No" property="b_No" />
+		<result column="bc_Goods" property="bc_Goods" />
+	</resultMap>
+
+	<resultMap type="com.sist.model.MemberDTO" id="MemberDTO">
+		<result column="m_Nickname" property="m_Nickname" />
+		<result column="m_Picture" property="m_Picture" />
+		<result column="m_Email" property="m_Email"/>
+		<collection property="blog_contentDTO" javaType="java.util.ArrayList"
+			resultMap="Blog_contentDTO" />
+	</resultMap>
+
+	<select id="get_BoardList" parameterType="com.sist.model.Blog_contentDTO"
+		resultMap="MemberDTO">
+		select M.m_nickname, M.m_Picture ,BC.bc_Cont, bc.bc_Date, bc.bc_No ,bc.bc_filecount ,M.m_Email,BC.b_no,bc.bc_Goods
+		from Member M ,blog_content BC
+		where m.m_email=bc.m_email AND bc.b_no=#{b_No}
+		order by bc.bc_no desc
+	</select>
+	
+	<select id="getboard_no" resultType="int">
+		select max(bc_no) from blog_content
+	</select>
+	<!-- <select id="recommendation_Bond" resultType="hashmap">
+	select ct_name,b_no,b_name,b_intro,b_picture
+	from (select ct_name,b_no,b_name,b_intro,b_picture,rank() over(partition by ct_name order by b_view desc) as rank
+        from blogrank)
+	where rank=1
+	</select> -->
+
+<select id="GoodsCount" parameterType="int" resultType="int">
+      select count(m_Email) from blog_content_good where bc_No = #{bc_No}
+   </select>
+
+   <select id="GoodsCheck" parameterType="com.sist.model.Blog_Content_GoodDTO" resultType="com.sist.model.Blog_Content_GoodDTO">
+      select * from blog_content_good where bc_No = #{bc_No} and m_Email = #{m_Email}
+   </select>
+   
+   <insert id="addGoods" parameterType="com.sist.model.Blog_Content_GoodDTO">
+      insert into blog_content_good
+      values(#{bc_No},#{m_Email})
+   </insert>
+   
+   <delete id="CancelGoods" parameterType="com.sist.model.Blog_Content_GoodDTO">
+         delete from blog_content_good where bc_No = #{bc_No} and  m_Email = #{m_Email}
+   </delete>
+
+<!-- 인기글 목록 불러오기 --> 
+   <select id="getHotList" parameterType="int" resultType="com.sist.model.Blog_contentDTO">
+    <![CDATA[
+         select * from( select *from blog_content
+                     where b_No = #{b_No} and bc_goods > 0 and bc_Date >= TO_CHAR(SYSDATE-300,'YYYYMMDD')  
+                     ORDER BY bc_goods desc, bc_date desc)
+                     where rownum < 6]]>
+   </select>
+  
+   
+   <select id="updateGoods" parameterType="com.sist.model.Blog_contentDTO">
+   		update blog_content set bc_goods = #{bc_Goods} where bc_No = #{bc_No}
+   </select>
+   
+   <!-- 공지사항쓰기 -->
+   <insert id="create_notice" parameterType="com.sist.model.Blog_contentDTO">
+      insert into blog_content
+      values(blog_content_seq.nextval,#{m_Email},#{b_No
+      },#{bc_Cont},sysdate,#{bc_filecount},'y',default)
+   </insert>
+   
+   <!-- 공지사항 목록 불러오기 -->
+<select id="getNoticeList" parameterType="int" resultType="com.sist.model.Blog_contentDTO">
+ <![CDATA[
+   select *
+   from(select *
+            from blog_content
+            where b_No = #{b_No} and  bc_Date >= TO_CHAR(SYSDATE-300,'YYYYMMDD') and bc_Type = 'y'
+            ORDER BY bc_Date desc)
+   where rownum <6
+ ]]>
+</select>
+
+<update id ="update_Board" parameterType="com.sist.model.Blog_contentDTO">
+	update blog_content set bc_cont=#{bc_Cont},bc_filecount=#{bc_filecount} where bc_no=#{bc_No}
+</update>
+
+<delete id ="delete_Board" parameterType="int">
+	delete from blog_content where bc_no=#{bc_No}
+</delete>
+
+<delete id="delete_Comment" parameterType="int">
+ <![CDATA[
+	delete from content_comment where cc_No=#{cc_No} or (cc_group=#{cc_Group} and cc_Indent >  #{cc_Indent} and cc_step> #{cc_Step})
+	    ]]>
+</delete>
+
+<update id="update_Comment" parameterType="com.sist.model.Content_CommentDTO">
+	update content_comment set cc_cont=#{cc_Cont} where cc_no=#{cc_No}
+</update>
+<update id="update_Step" parameterType="com.sist.model.Content_CommentDTO">
+	update content_comment set cc_step=cc_step+1 where cc_group=#{cc_Group} and cc_step>#{cc_Step}
+</update>
+
+<insert id="create_Reply_Comment" parameterType="com.sist.model.Content_CommentDTO">
+	insert into content_comment values(CONTENT_COMMENT_SEQ.nextval,#{bc_No},#{cc_Cont},#{m_Email},#{cc_Group},#{cc_Step}+1,#{cc_Indent}+1,sysdate)
+</insert>
+
+<select id="getComment_step" parameterType="int" resultType="int">
+	select cc_step
+	from content_comment
+	where cc_no=#{cc_No}
+</select>
+
+<!-- 사진첩 불러오기 -->
+
+   <select id="getPictureList" parameterType="int" resultType="hashmap" >
+   		 select u.bc_no,u.File_name,u.bc_cont,u.upload_date,m.m_nickname,m.m_picture,m.m_email,bc_filecount,rownum
+		from (select f.bc_No,f.file_Name,f.upload_date,bc.m_email,bc.bc_cont,bc.bc_filecount
+					from B_Content_File f, Blog_Content bc
+					where f.bc_no = bc.bc_no and b_No = #{b_No}) u, member m
+		where m.m_email = u.m_email
+		order by upload_date desc
+   </select>
+   
+   <!-- 인기사진첩 불러오기 -->
+   <select id="getHotPicture" parameterType="int" resultType="hashmap">
+   <![CDATA[
+   select u.file_name, u.upload_date, u.bc_no, u.m_email, u.b_no,u.bc_cont, u.bc_goods, m.m_nickname,u.bc_filecount,m.m_picture
+   from (select *
+               from(select bc.bc_filecount,f.file_name,f.upload_date,f.bc_no,bc.m_email,bc.b_no,bc.bc_cont,bc.bc_goods
+                         from b_content_file f, blog_content bc
+                         where f.bc_no = bc.bc_no and  bc.bc_Date >= TO_CHAR(SYSDATE-300,'YYYYMMDD') and bc.b_no =#{b_No}
+                         order by bc.bc_goods desc)
+                 where rownum < 7) u, member m
+   where u.m_email = m.m_email
+
+    ]]>
+   </select>
+</mapper>

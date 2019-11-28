@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.model.CategoryDTO">
+	<select id="get_Category" resultType="com.sist.model.CategoryDTO">
+		select * from categorylist
+	</select>
+	
+	
+	
+	<insert id="create_Category" parameterType="hashmap">
+		insert into Blog_Category values(#{Category_No},#{Blog_No})
+	</insert>
+</mapper>

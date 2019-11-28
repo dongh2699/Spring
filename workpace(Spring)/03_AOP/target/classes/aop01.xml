@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+
+		<bean id="boy" class="com.sist.aop02.Boy" />
+		<bean id="girl" class="com.sist.aop02.Girl" />
+		<bean id="myaspect" class="com.sist.aop02.MyAspect" />
+		
+		<aop:config>
+      <!-- 공통관심사항이 있는 클래스 -->
+      <aop:aspect ref="myaspect">
+         <!-- 클래스와 상관없이 doSomething() 메서드가 pointCut이다 -->
+         <aop:pointcut expression="execution(* doSomething())" id="mypointcut" />
+         <aop:before method="before" pointcut-ref="mypointcut"/>
+         <aop:after method="af" pointcut-ref="mypointcut"/>
+         <aop:after-returning method="after_returning" pointcut-ref="mypointcut"/>
+         <aop:after-throwing method="after_throwing" pointcut-ref="mypointcut"/>
+      </aop:aspect>
+   </aop:config>
+		
+		
+</beans>

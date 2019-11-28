@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.model.BoardDAO">
+	
+		<select id="list" resultType="com.spring.model.BoardDTO">
+			select * from board order by board_no desc
+		</select>
+    	
+    	<insert id="add" parameterType="com.spring.model.BoardDTO">
+    		insert into board values
+    			(board_seq.nextval,#{board_writer},#{board_title},#{board_cont},#{board_pwd},default,sysdate)
+    	</insert>
+    	
+    	<update id="count" parameterType="int">
+    		update board set board_hit=board_hit+1 where board_no=#{no}
+    	</update>
+    	
+    	<select id="cont" parameterType="int" resultType="com.spring.model.BoardDTO">
+    		select * from board where board_no=#{no}
+    	</select>
+    	
+    	<update id="modify" parameterType="com.spring.model.BoardDTO">
+    		update board set board_title=#{board_title} , board_cont=#{board_cont}
+    			where board_no=#{board_no}  
+    	</update>
+    	
+    	<delete id="delete" parameterType="int" >
+    		delete from board where board_no=#{no}
+    	</delete>
+    	
+    	<select id="title" parameterType="String" resultType="com.spring.model.BoardDTO">
+    		select * from board where board_title like '%'||#{name}||'%'
+    	</select>
+    	<select id="content" parameterType="String" resultType="com.spring.model.BoardDTO">
+    		select * from board where board_cont like '%'||#{name}||'%'
+    	</select>
+    	<select id="title_cont" parameterType="String" resultType="com.spring.model.BoardDTO">
+    		select * from board where board_title like '%'||#{name}||'%' or board_cont like '%'||#{name}||'%'
+    	</select>
+    	<select id="writer" parameterType="String" resultType="com.spring.model.BoardDTO">
+    		select * from board where board_writer like '%'||#{name}||'%'
+    	</select>
+</mapper>

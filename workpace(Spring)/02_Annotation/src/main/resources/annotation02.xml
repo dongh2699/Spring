@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+			<!-- @Autowired 애노테이션 사용 시 필수적으로 설정 -->
+			<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"></bean>
+			<bean id="implclass" class="com.sist.anno02.ImplClass" />			
+			<bean id="useclass" class="com.sist.anno02.UseClass">
+					<!--  	<property name="impl" ref="implclass" /> -->
+			</bean>
+
+
+</beans>

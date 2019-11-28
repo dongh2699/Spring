@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.model.userDAO">
+
+	<insert id="join" parameterType="com.sist.model.userDTO">
+		insert into testBand values
+			(#{userId}, #{userPwd}, #{userName}, #{userCam}, #{userNick}, #{userBirth}, #{userPhone})
+	</insert>
+	
+	<select id="userlist" resultType="com.sist.model.userDTO">
+		select * from testBand
+	</select>
+	
+	<select id="login" parameterType="com.sist.model.userDTO" resultType="com.sist.model.userDTO">
+		select userId, userName, userCam, userNick, userBirth, userPhone from testBand where userId=#{userId} and userPwd=#{userPwd}
+	</select>
+	
+	<select id="userInfo" parameterType="String" resultType="com.sist.model.userDTO">
+    		select * from testBand where userId=#{userId}
+    </select>
+    
+    <select id="userIdCheck" parameterType="String" resultType="com.sist.model.userDTO">
+    		select * from testBand where userId=#{userId}
+    </select>
+	
+	<update id="userModify" parameterType="com.sist.model.userDTO" >
+		update testBand set userPwd=#{userPwd}, userName=#{userName}, userCam=#{userCam}, userNick=#{userNick}, userBirth=#{userBirth}, userPhone=#{userPhone}
+		where userId=#{userId}
+	</update>
+	
+	<delete id="userDelete" parameterType="com.sist.model.userDTO">
+		delete from testBand where userId=#{userId} and userPwd=#{userPwd}
+	</delete>
+</mapper>

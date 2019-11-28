@@ -1,0 +1,112 @@
+@CHARSET "UTF-8";
+
+main .container .row .col-md-6 #gallary {
+  display: grid;
+    margin-top: 50px;
+    grid-template-columns: repeat(4, minmax(0,1fr));
+}
+.modal-dialog .input-group {
+   display: flex;
+   z-index: 1;
+    width: 100%;
+    padding-left: 100px;
+    display: flex;
+}
+main .container .row .col-md-6 #gallary .gallarythumbnail {
+   width: 100%;
+   height: auto;
+
+transition:transform 1.2s;
+}
+
+.create_Comment_Form{
+margin-bottom: 30px;	
+}
+main .container .row .col-md-6 #gallary .gallarythumbnail:hover {
+   transform:scale(1.2);
+}
+
+#gallary_container{
+   margin-top: 150px;
+   }
+   
+.gallary_background{
+   padding-left:17px;
+   text-align:center;
+   background-color: white;
+   padding-top: 5px;
+   border-radius: 20px;
+   padding-bottom: 50px;
+}
+   
+.gallay_List{
+   width:120px;
+   height: 120px;
+   background-color: black ;
+    line-height: 120px;
+    margin-right: 20px;
+    overflow: hidden;
+    margin-bottom: 20px;
+
+}
+.gallay_title{
+   font-weight:550;
+   font-size: 30px;
+   font-family: 
+}
+.content{
+	font-size: 30px;
+}
+.contentRight .col-md-8{
+	font-size:18px;
+	font-weight: 600;
+}
+#content_area{
+    border-bottom: 2px solid #eee;
+    border-top: 2px solid #eee;
+    margin: 20px 0px;
+}
+.col-md-1{
+ color:white;
+}
+#uploadfile{
+animation: fadeIn 0.5s linear;
+	}
+	
+@keyframes fadeIn{
+  from{
+ opacity: 0;
+   }
+ to{
+  opacity: 1;
+    }
+}
+.slider{
+	display: none
+}
+
+@media screen and (max-width: 425px) {
+	
+	main .container .row .col-md-12 .hotCont {
+ 
+    margin-left: 0px;
+   
+}
+	
+	main .container .row .col-md-6 #gallary {
+    	display: flow-root;
+	}
+	
+	#files{
+		float: left;
+		margin-left: 35px;
+	}
+	
+	.uploadArea .row {
+		display: flex;
+	}
+	
+	#uploadfile {
+		width: 100%;
+	}
+}
